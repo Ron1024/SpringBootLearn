@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.example.demo.model.User">
+        <id column="user_id" property="userId" jdbcType="DECIMAL"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_loginname" property="userLoginname" jdbcType="VARCHAR"/>
+        <result column="user_password" property="userPassword" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="email" property="email" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="first_login_time" property="firstLoginTime" jdbcType="TIMESTAMP"/>
+        <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result column="login_count" property="loginCount" jdbcType="DECIMAL"/>
+        <result column="user_memo" property="userMemo" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.example.demo.model.User" extends="BaseResultMap">
+        <result column="image" property="image" jdbcType="LONGVARBINARY"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    user_id, user_name, user_loginname, user_password, mobile, email, create_time, first_login_time,
+    last_login_time, login_count, user_memo
+  </sql>
+    <sql id="Blob_Column_List">
+    image
+  </sql>
+    <select id="getUserByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+       select * from pm_user
+       where  user_id = ${userId}
+    </select>
+
+</mapper>
